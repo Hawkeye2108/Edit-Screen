@@ -128,3 +128,465 @@ const ScheduleForm = () => {
 
 export default ScheduleForm;
 
+
+
+
+
+
+
+import React, { useState } from 'react';
+import { 
+  Box, 
+  Paper, 
+  Typography, 
+  Select, 
+  MenuItem, 
+  TextField, 
+  FormControl, 
+  InputLabel, 
+  Radio, 
+  RadioGroup, 
+  FormControlLabel, 
+  Checkbox, 
+  Button, 
+  Grid,
+  Divider
+} from '@mui/material';
+import AddIcon from 'lucide-react';
+
+const ScheduleForm = () => {
+  // State for form fields
+  const [formData, setFormData] = useState({
+    orgUnit: "US",
+    businessUnit: "Rare Diseases",
+    functionalArea: "Sales Ops",
+    specialty: "Oncology",
+    ruleName: "Product Pricing Discount",
+    ruleStartDate: "4/1/2024",
+    ruleStartTime: "00:00",
+    ruleEndDate: "4/1/2025",
+    ruleEndTime: "00:00",
+    executionType: "recurring",
+    frequency: "hourly"
+  });
+
+  return (
+    <Paper sx={{ p: 3, maxWidth: 1000, mx: 'auto' }}>
+      <Box sx={{ bgcolor: '#2077B4', color: 'white', p: 1, textAlign: 'center', mb: 3 }}>
+        <Typography variant="h6">Schedule</Typography>
+      </Box>
+      
+      <Grid container spacing={3} sx={{ mb: 4 }}>
+        <Grid item xs={3}>
+          <FormControl fullWidth size="small">
+            <InputLabel>Org Unit</InputLabel>
+            <Select
+              value={formData.orgUnit}
+              label="Org Unit"
+              variant="outlined"
+            >
+              <MenuItem value="US">US</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        
+        <Grid item xs={3}>
+          <FormControl fullWidth size="small">
+            <InputLabel>Business Unit</InputLabel>
+            <Select
+              value={formData.businessUnit}
+              label="Business Unit"
+              variant="outlined"
+            >
+              <MenuItem value="Rare Diseases">Rare Diseases</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        
+        <Grid item xs={3}>
+          <FormControl fullWidth size="small">
+            <InputLabel>Functional Area</InputLabel>
+            <Select
+              value={formData.functionalArea}
+              label="Functional Area"
+              variant="outlined"
+            >
+              <MenuItem value="Sales Ops">Sales Ops</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        
+        <Grid item xs={3}>
+          <FormControl fullWidth size="small">
+            <InputLabel>Specialty</InputLabel>
+            <Select
+              value={formData.specialty}
+              label="Specialty"
+              variant="outlined"
+            >
+              <MenuItem value="Oncology">Oncology</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+      </Grid>
+      
+      <Divider sx={{ my: 2 }} />
+      
+      <Grid container spacing={3}>
+        <Grid item xs={3}>
+          <FormControl fullWidth>
+            <InputLabel>Rule Name</InputLabel>
+            <Select
+              value={formData.ruleName}
+              label="Rule Name"
+              variant="outlined"
+              size="small"
+            >
+              <MenuItem value="Product Pricing Discount">Product Pricing Discount</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        
+        <Grid item xs={3}>
+          <TextField
+            fullWidth
+            label="Rule Start Date"
+            variant="outlined"
+            size="small"
+            value={formData.ruleStartDate}
+          />
+        </Grid>
+        
+        <Grid item xs={3}>
+          <TextField
+            fullWidth
+            label="Rule Start Time"
+            variant="outlined"
+            size="small"
+            value={formData.ruleStartTime}
+          />
+        </Grid>
+        
+        <Grid item xs={1.5}>
+          <TextField
+            fullWidth
+            label="Rule End Date (Optional)"
+            variant="outlined"
+            size="small"
+            value={formData.ruleEndDate}
+          />
+        </Grid>
+        
+        <Grid item xs={1.5}>
+          <TextField
+            fullWidth
+            label="Rule End Time (Optional)"
+            variant="outlined"
+            size="small"
+            value={formData.ruleEndTime}
+          />
+        </Grid>
+      </Grid>
+      
+      <Grid container spacing={2} sx={{ mt: 3 }}>
+        <Grid item xs={2}>
+          <Typography variant="subtitle1">Execution Type</Typography>
+        </Grid>
+        
+        <Grid item xs={10}>
+          <FormControl component="fieldset">
+            <RadioGroup row name="executionType" value={formData.executionType}>
+              <FormControlLabel 
+                value="recurring" 
+                control={<Checkbox checked={formData.executionType === "recurring"} />} 
+                label="Recurring" 
+              />
+              <FormControlLabel 
+                value="event-driven" 
+                control={<Checkbox />} 
+                label="Event-Driven" 
+              />
+              <FormControlLabel 
+                value="real-time" 
+                control={<Checkbox />} 
+                label="Real-Time Execution" 
+              />
+            </RadioGroup>
+          </FormControl>
+        </Grid>
+      </Grid>
+      
+      <Grid container spacing={2} sx={{ mt: 2 }}>
+        <Grid item xs={2}>
+          <Typography variant="subtitle1">Frequency</Typography>
+        </Grid>
+        
+        <Grid item xs={10}>
+          <FormControl component="fieldset">
+            <RadioGroup row name="frequency" value={formData.frequency}>
+              <FormControlLabel value="hourly" control={<Radio checked />} label="Hourly" />
+              <FormControlLabel value="daily" control={<Radio />} label="Daily" />
+              <FormControlLabel value="weekly" control={<Radio />} label="Weekly" />
+              <FormControlLabel value="monthly" control={<Radio />} label="Monthly" />
+            </RadioGroup>
+          </FormControl>
+        </Grid>
+      </Grid>
+      
+      <Grid container spacing={2} sx={{ mt: 3 }}>
+        <Grid item xs={3}>
+          <TextField
+            fullWidth
+            label="Approver (optional)"
+            variant="outlined"
+            size="small"
+          />
+        </Grid>
+        
+        <Grid item xs={9} sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2 }}>
+          <Button variant="contained" color="inherit">Cancel</Button>
+          <Button variant="contained" sx={{ bgcolor: '#2077B4', color: 'white' }}>Save Draft</Button>
+          <Button variant="contained" color="primary">Submit</Button>
+        </Grid>
+      </Grid>
+      
+      <Box sx={{ mt: 3, display: 'flex', alignItems: 'center' }}>
+        <AddIcon size={20} />
+        <Typography variant="body2" sx={{ ml: 1 }}>Add Additional Schedule Criteria</Typography>
+      </Box>
+    </Paper>
+  );
+};
+
+export default ScheduleForm;
+
+
+
+
+
+import React, { useState } from 'react';
+import { 
+  Box, 
+  Paper, 
+  Typography, 
+  Select, 
+  MenuItem, 
+  TextField, 
+  FormControl, 
+  InputLabel, 
+  Radio, 
+  RadioGroup, 
+  FormControlLabel, 
+  Checkbox, 
+  Button, 
+  Grid,
+  Divider
+} from '@mui/material';
+import AddIcon from 'lucide-react';
+
+const ScheduleForm = () => {
+  // State for form fields
+  const [formData, setFormData] = useState({
+    orgUnit: "US",
+    businessUnit: "Rare Diseases",
+    functionalArea: "Sales Ops",
+    specialty: "Oncology",
+    ruleName: "Product Pricing Discount",
+    ruleStartDate: "4/1/2024",
+    ruleStartTime: "00:00",
+    ruleEndDate: "4/1/2025",
+    ruleEndTime: "00:00",
+    executionType: "recurring",
+    frequency: "hourly"
+  });
+
+  return (
+    <Paper sx={{ p: 3, maxWidth: 1000, mx: 'auto' }}>
+      <Box sx={{ bgcolor: '#2077B4', color: 'white', p: 1, textAlign: 'center', mb: 3 }}>
+        <Typography variant="h6">Schedule</Typography>
+      </Box>
+      
+      <Grid container spacing={3} sx={{ mb: 4 }}>
+        <Grid item xs={3}>
+          <FormControl fullWidth size="small">
+            <InputLabel>Org Unit</InputLabel>
+            <Select
+              value={formData.orgUnit}
+              label="Org Unit"
+              variant="outlined"
+            >
+              <MenuItem value="US">US</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        
+        <Grid item xs={3}>
+          <FormControl fullWidth size="small">
+            <InputLabel>Business Unit</InputLabel>
+            <Select
+              value={formData.businessUnit}
+              label="Business Unit"
+              variant="outlined"
+            >
+              <MenuItem value="Rare Diseases">Rare Diseases</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        
+        <Grid item xs={3}>
+          <FormControl fullWidth size="small">
+            <InputLabel>Functional Area</InputLabel>
+            <Select
+              value={formData.functionalArea}
+              label="Functional Area"
+              variant="outlined"
+            >
+              <MenuItem value="Sales Ops">Sales Ops</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        
+        <Grid item xs={3}>
+          <FormControl fullWidth size="small">
+            <InputLabel>Specialty</InputLabel>
+            <Select
+              value={formData.specialty}
+              label="Specialty"
+              variant="outlined"
+            >
+              <MenuItem value="Oncology">Oncology</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+      </Grid>
+      
+      <Divider sx={{ my: 2 }} />
+      
+      <Grid container spacing={3}>
+        <Grid item xs={3}>
+          <FormControl fullWidth>
+            <InputLabel>Rule Name</InputLabel>
+            <Select
+              value={formData.ruleName}
+              label="Rule Name"
+              variant="outlined"
+              size="small"
+            >
+              <MenuItem value="Product Pricing Discount">Product Pricing Discount</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        
+        <Grid item xs={3}>
+          <TextField
+            fullWidth
+            label="Rule Start Date"
+            variant="outlined"
+            size="small"
+            value={formData.ruleStartDate}
+          />
+        </Grid>
+        
+        <Grid item xs={3}>
+          <TextField
+            fullWidth
+            label="Rule Start Time"
+            variant="outlined"
+            size="small"
+            value={formData.ruleStartTime}
+          />
+        </Grid>
+        
+        <Grid item xs={1.5}>
+          <TextField
+            fullWidth
+            label="Rule End Date (Optional)"
+            variant="outlined"
+            size="small"
+            value={formData.ruleEndDate}
+          />
+        </Grid>
+        
+        <Grid item xs={1.5}>
+          <TextField
+            fullWidth
+            label="Rule End Time (Optional)"
+            variant="outlined"
+            size="small"
+            value={formData.ruleEndTime}
+          />
+        </Grid>
+      </Grid>
+      
+      <Grid container spacing={2} sx={{ mt: 3 }}>
+        <Grid item xs={2}>
+          <Typography variant="subtitle1">Execution Type</Typography>
+        </Grid>
+        
+        <Grid item xs={10}>
+          <FormControl component="fieldset">
+            <RadioGroup row name="executionType" value={formData.executionType}>
+              <FormControlLabel 
+                value="recurring" 
+                control={<Checkbox checked={formData.executionType === "recurring"} />} 
+                label="Recurring" 
+              />
+              <FormControlLabel 
+                value="event-driven" 
+                control={<Checkbox />} 
+                label="Event-Driven" 
+              />
+              <FormControlLabel 
+                value="real-time" 
+                control={<Checkbox />} 
+                label="Real-Time Execution" 
+              />
+            </RadioGroup>
+          </FormControl>
+        </Grid>
+      </Grid>
+      
+      <Grid container spacing={2} sx={{ mt: 2 }}>
+        <Grid item xs={2}>
+          <Typography variant="subtitle1">Frequency</Typography>
+        </Grid>
+        
+        <Grid item xs={10}>
+          <FormControl component="fieldset">
+            <RadioGroup row name="frequency" value={formData.frequency}>
+              <FormControlLabel value="hourly" control={<Radio checked />} label="Hourly" />
+              <FormControlLabel value="daily" control={<Radio />} label="Daily" />
+              <FormControlLabel value="weekly" control={<Radio />} label="Weekly" />
+              <FormControlLabel value="monthly" control={<Radio />} label="Monthly" />
+            </RadioGroup>
+          </FormControl>
+        </Grid>
+      </Grid>
+      
+      <Grid container spacing={2} sx={{ mt: 3 }}>
+        <Grid item xs={3}>
+          <TextField
+            fullWidth
+            label="Approver (optional)"
+            variant="outlined"
+            size="small"
+          />
+        </Grid>
+        
+        <Grid item xs={9} sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2 }}>
+          <Button variant="contained" color="inherit">Cancel</Button>
+          <Button variant="contained" sx={{ bgcolor: '#2077B4', color: 'white' }}>Save Draft</Button>
+          <Button variant="contained" color="primary">Submit</Button>
+        </Grid>
+      </Grid>
+      
+      <Box sx={{ mt: 3, display: 'flex', alignItems: 'center' }}>
+        <AddIcon size={20} />
+        <Typography variant="body2" sx={{ ml: 1 }}>Add Additional Schedule Criteria</Typography>
+      </Box>
+    </Paper>
+  );
+};
+
+export default ScheduleForm;
+
