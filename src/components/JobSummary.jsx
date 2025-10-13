@@ -1,5 +1,5 @@
 // DataProfilingDashboard.jsx
-// Complete Material-UI implementation matching your image
+// Complete Material-UI implementation matching your image EXACTLY
 
 import React, { useState } from 'react';
 import {
@@ -15,7 +15,6 @@ import {
   Chip,
   IconButton,
   Stack,
-  Divider,
 } from '@mui/material';
 import {
   PlayArrow,
@@ -34,7 +33,7 @@ const GaugeChart = ({ value, target, label, color }) => {
       sx={{
         textAlign: 'center',
         position: 'relative',
-        width: 220,
+        minWidth: 180,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -43,46 +42,46 @@ const GaugeChart = ({ value, target, label, color }) => {
       <Typography
         variant="h6"
         sx={{
-          mb: 2,
+          mb: 1,
           color: '#1a237e',
           fontWeight: 700,
-          fontSize: '1.1rem',
+          fontSize: '1rem',
         }}
       >
         {label}
       </Typography>
       <Box sx={{ position: 'relative', display: 'inline-block' }}>
-        <svg width="200" height="110" viewBox="0 0 200 110">
+        <svg width="180" height="100" viewBox="0 0 180 100">
           {/* Background arc - gray */}
           <path
-            d="M 30 95 A 70 70 0 0 1 170 95"
+            d="M 25 85 A 65 65 0 0 1 155 85"
             fill="none"
             stroke="#d0d0d0"
-            strokeWidth="18"
+            strokeWidth="16"
             strokeLinecap="round"
           />
           {/* Progress arc - colored */}
           <path
-            d="M 30 95 A 70 70 0 0 1 170 95"
+            d="M 25 85 A 65 65 0 0 1 155 85"
             fill="none"
             stroke={color}
-            strokeWidth="18"
+            strokeWidth="16"
             strokeLinecap="round"
-            strokeDasharray={`${percentage * 2.2} 220`}
+            strokeDasharray={`${percentage * 2.04} 204`}
           />
           {/* Needle */}
           <line
-            x1="100"
-            y1="95"
-            x2="100"
-            y2="35"
+            x1="90"
+            y1="85"
+            x2="90"
+            y2="30"
             stroke="#000"
-            strokeWidth="3"
+            strokeWidth="2.5"
             strokeLinecap="round"
-            transform={`rotate(${rotation} 100 95)`}
+            transform={`rotate(${rotation} 90 85)`}
           />
           {/* Center circle */}
-          <circle cx="100" cy="95" r="5" fill="#000" />
+          <circle cx="90" cy="85" r="4" fill="#000" />
         </svg>
         {/* Value display */}
         <Box
@@ -99,7 +98,7 @@ const GaugeChart = ({ value, target, label, color }) => {
             sx={{
               fontWeight: 700,
               color: '#000',
-              fontSize: '2.5rem',
+              fontSize: '2.2rem',
               lineHeight: 1,
             }}
           >
@@ -109,7 +108,7 @@ const GaugeChart = ({ value, target, label, color }) => {
             variant="caption"
             sx={{
               color: '#666',
-              fontSize: '0.75rem',
+              fontSize: '0.7rem',
             }}
           >
             Target: {target}
@@ -122,17 +121,17 @@ const GaugeChart = ({ value, target, label, color }) => {
           display: 'flex',
           justifyContent: 'space-between',
           width: '100%',
-          mt: 1,
-          px: 1.5,
+          mt: 0.5,
+          px: 1,
         }}
       >
-        <Typography variant="caption" sx={{ color: '#999', fontSize: '0.7rem' }}>
+        <Typography variant="caption" sx={{ color: '#999', fontSize: '0.65rem' }}>
           0
         </Typography>
-        <Typography variant="caption" sx={{ color: '#999', fontSize: '0.7rem' }}>
+        <Typography variant="caption" sx={{ color: '#999', fontSize: '0.65rem' }}>
           50
         </Typography>
-        <Typography variant="caption" sx={{ color: '#999', fontSize: '0.7rem' }}>
+        <Typography variant="caption" sx={{ color: '#999', fontSize: '0.65rem' }}>
           100
         </Typography>
       </Box>
@@ -157,21 +156,21 @@ const JobCard = ({ name, status, schedule, nextRun, lastRun, scopeItems }) => {
     <Card
       sx={{
         mb: 2,
-        boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+        boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
         '&:hover': {
-          boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
         },
         transition: 'box-shadow 0.3s ease',
         borderRadius: 1,
       }}
     >
-      <CardContent sx={{ p: 3 }}>
+      <CardContent sx={{ p: 2.5 }}>
         <Box
           sx={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'flex-start',
-            mb: 2,
+            mb: 1.5,
           }}
         >
           <Box>
@@ -181,7 +180,7 @@ const JobCard = ({ name, status, schedule, nextRun, lastRun, scopeItems }) => {
                 fontWeight: 600,
                 mb: 1,
                 color: '#1a237e',
-                fontSize: '1.1rem',
+                fontSize: '1rem',
               }}
             >
               {name}
@@ -193,7 +192,8 @@ const JobCard = ({ name, status, schedule, nextRun, lastRun, scopeItems }) => {
                 backgroundColor: statusConfig.bgColor,
                 color: 'white',
                 fontWeight: 600,
-                fontSize: '0.75rem',
+                fontSize: '0.7rem',
+                height: '22px',
               }}
             />
           </Box>
@@ -202,6 +202,7 @@ const JobCard = ({ name, status, schedule, nextRun, lastRun, scopeItems }) => {
               size="small"
               sx={{
                 color: '#2196f3',
+                padding: '4px',
                 '&:hover': { backgroundColor: 'rgba(33, 150, 243, 0.08)' },
               }}
             >
@@ -211,6 +212,7 @@ const JobCard = ({ name, status, schedule, nextRun, lastRun, scopeItems }) => {
               size="small"
               sx={{
                 color: '#2196f3',
+                padding: '4px',
                 '&:hover': { backgroundColor: 'rgba(33, 150, 243, 0.08)' },
               }}
             >
@@ -219,23 +221,23 @@ const JobCard = ({ name, status, schedule, nextRun, lastRun, scopeItems }) => {
           </Stack>
         </Box>
 
-        <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 2 }}>
-          <FiberManualRecord sx={{ fontSize: 14, color: '#999' }} />
-          <Typography variant="body2" sx={{ color: '#666' }}>
+        <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1.5 }}>
+          <FiberManualRecord sx={{ fontSize: 12, color: '#999' }} />
+          <Typography variant="body2" sx={{ color: '#666', fontSize: '0.85rem' }}>
             {schedule}
           </Typography>
         </Stack>
 
-        <Box sx={{ mt: 2 }}>
+        <Box sx={{ mt: 1.5 }}>
           <Typography
             variant="body2"
-            sx={{ color: '#666', mb: 0.5, fontSize: '0.875rem' }}
+            sx={{ color: '#666', mb: 0.3, fontSize: '0.82rem' }}
           >
             <strong>Next Run:</strong> {nextRun}
           </Typography>
           <Typography
             variant="body2"
-            sx={{ color: '#666', mb: 2, fontSize: '0.875rem' }}
+            sx={{ color: '#666', mb: 1.5, fontSize: '0.82rem' }}
           >
             <strong>Last Run:</strong> {lastRun}
           </Typography>
@@ -246,14 +248,14 @@ const JobCard = ({ name, status, schedule, nextRun, lastRun, scopeItems }) => {
                 variant="body2"
                 sx={{
                   fontWeight: 600,
-                  mb: 1,
+                  mb: 0.8,
                   color: '#1a237e',
-                  fontSize: '0.875rem',
+                  fontSize: '0.82rem',
                 }}
               >
                 Profiling Scope:
               </Typography>
-              <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+              <Stack direction="row" spacing={0.8} flexWrap="wrap" useFlexGap>
                 {scopeItems.map((item, index) => (
                   <Chip
                     key={index}
@@ -261,8 +263,8 @@ const JobCard = ({ name, status, schedule, nextRun, lastRun, scopeItems }) => {
                     size="small"
                     variant="outlined"
                     sx={{
-                      fontSize: '0.75rem',
-                      height: '24px',
+                      fontSize: '0.7rem',
+                      height: '22px',
                       borderColor: '#ccc',
                       color: '#666',
                     }}
@@ -317,16 +319,16 @@ const DataProfilingDashboard = () => {
       sx={{
         bgcolor: '#f5f7fa',
         minHeight: '100vh',
-        py: 4,
+        py: 3,
       }}
     >
       <Container maxWidth="xl">
         {/* Header with Tabs */}
         <Paper
           sx={{
-            mb: 3,
+            mb: 2.5,
             borderRadius: 1,
-            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
           }}
         >
           <Tabs
@@ -337,9 +339,9 @@ const DataProfilingDashboard = () => {
               '& .MuiTab-root': {
                 textTransform: 'none',
                 fontWeight: 600,
-                fontSize: '0.95rem',
+                fontSize: '0.9rem',
                 color: '#666',
-                minHeight: 56,
+                minHeight: 52,
               },
               '& .Mui-selected': {
                 color: '#1a237e',
@@ -356,82 +358,79 @@ const DataProfilingDashboard = () => {
           </Tabs>
         </Paper>
 
-        {/* Gauge Charts Section */}
+        {/* Gauge Charts Section - HORIZONTAL LAYOUT */}
         <Paper
           sx={{
-            p: 4,
-            mb: 3,
+            p: 3,
+            mb: 2.5,
             borderRadius: 1,
-            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
           }}
         >
-          <Grid
-            container
-            spacing={2}
-            justifyContent="center"
-            alignItems="center"
-            sx={{ flexWrap: 'wrap' }}
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              flexWrap: 'nowrap',
+              gap: 1,
+            }}
           >
-            <Grid item>
-              <GaugeChart
-                value={23}
-                target={50}
-                label="Active Job"
-                color="#4caf50"
-              />
-            </Grid>
-            <Grid item sx={{ display: 'flex', alignItems: 'center', mx: 2 }}>
-              <IconButton
-                sx={{
-                  color: '#2196f3',
-                  '&:hover': { backgroundColor: 'rgba(33, 150, 243, 0.08)' },
-                }}
-              >
-                <OpenWith />
-              </IconButton>
-            </Grid>
-            <Grid item>
-              <GaugeChart
-                value={34}
-                target={50}
-                label="Running Job"
-                color="#2196f3"
-              />
-            </Grid>
-            <Grid item>
-              <GaugeChart
-                value={34}
-                target={50}
-                label="Paused Job"
-                color="#9e9e9e"
-              />
-            </Grid>
-            <Grid item>
-              <GaugeChart
-                value={34}
-                target={50}
-                label="Failed Job"
-                color="#f44336"
-              />
-            </Grid>
-          </Grid>
+            <GaugeChart
+              value={23}
+              target={50}
+              label="Active Job"
+              color="#4caf50"
+            />
+            
+            <IconButton
+              sx={{
+                color: '#2196f3',
+                alignSelf: 'center',
+                '&:hover': { backgroundColor: 'rgba(33, 150, 243, 0.08)' },
+              }}
+            >
+              <OpenWith />
+            </IconButton>
+            
+            <GaugeChart
+              value={34}
+              target={50}
+              label="Running Job"
+              color="#2196f3"
+            />
+            
+            <GaugeChart
+              value={34}
+              target={50}
+              label="Paused Job"
+              color="#9e9e9e"
+            />
+            
+            <GaugeChart
+              value={34}
+              target={50}
+              label="Failed Job"
+              color="#f44336"
+            />
+          </Box>
         </Paper>
 
         {/* Jobs List Section */}
         <Paper
           sx={{
-            p: 4,
+            p: 3,
             borderRadius: 1,
-            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
           }}
         >
           <Typography
             variant="h6"
             sx={{
-              mb: 3,
+              mb: 2.5,
               fontWeight: 600,
               color: '#1a237e',
-              fontSize: '1.2rem',
+              fontSize: '1.1rem',
             }}
           >
             Configure and monitor data profiling jobs
